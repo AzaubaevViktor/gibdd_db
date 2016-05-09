@@ -1,6 +1,8 @@
 import json
 from abc import ABC, abstractmethod
 
+import datetime
+
 
 class FieldType(ABC):
     def __str__(self):
@@ -77,6 +79,11 @@ class Number(Variable):
 
 class Date(Variable):
     _type_s = "DATE"
+
+    def check_value(self, raw_value: datetime.datetime):
+        return "TO_DATE('{}', 'DD.MM.YYYY HH24:MI')".format(
+            raw_value.strftime('%d.%m.%Y %H:%M')
+        )
 
 
 class Float(Variable):

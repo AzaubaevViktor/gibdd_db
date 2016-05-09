@@ -1,3 +1,5 @@
+import datetime
+
 import ora_adapter as ora
 
 
@@ -8,7 +10,7 @@ class TestTable(ora.Table):
     id = ora.Number(10, primary_key=True)
     string_data = ora.VarChar2(30, default="default v")
     float_data = ora.Float(16)
-    # date_data = ora.Date()
+    date_data = ora.Date()
 
     _table_name = "test_table"
 
@@ -16,11 +18,12 @@ class TestTable(ora.Table):
         self.id = _id
         self.string_data = s
         self.float_data = flo
+        self.date_data = dt
 
 ora.Oracle(conn_str)
 
 # TestTable.create_table()
-row = TestTable(1, "test", 123.333)
+row = TestTable(1, "test", 123.333, datetime.datetime.now())
 row.insert()
 ora.Oracle.commit()
 ora.Oracle.close()

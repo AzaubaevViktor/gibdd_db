@@ -48,7 +48,7 @@ class Table:
         :return:
         """
         fields = []
-        for k, v in cls.__fields.items():
+        for k, v in cls._get_fields().items():
             fields.append(
                 v.build(name=k)
             )
