@@ -8,18 +8,20 @@ class TestTable(ora.Table):
     id = ora.Number(10, primary_key=True)
     string_data = ora.VarChar2(30, default="default v")
     float_data = ora.Float(16)
+    # date_data = ora.Date()
 
     _table_name = "test_table"
 
-    def __init__(self, _id, s, dt):
+    def __init__(self, _id, s, flo, dt):
         self.id = _id
         self.string_data = s
-        self.float_data = dt
+        self.float_data = flo
 
 ora.Oracle(conn_str)
 
-TestTable.create_table()
-
+# TestTable.create_table()
+row = TestTable(1, "test", 123.333)
+row.insert()
 ora.Oracle.commit()
 ora.Oracle.close()
 

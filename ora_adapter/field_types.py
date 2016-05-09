@@ -15,12 +15,13 @@ class Variable(FieldType):
     _type_s = "ABSTRACTTYPE"
 
     def __init__(self,
-                 size,
+                 size=None,
                  default=None,
                  not_null=False,
                  unique=False,
                  primary_key=False,
                  ):
+        self._value = None
         size = "({})".format(size) if size else ""
         not_null = "NOT NULL" if not_null else ""
         unique = "UNIQUE" if unique else ""
@@ -38,9 +39,36 @@ class Variable(FieldType):
     def build(self, **kwargs):
         return self.fmt.format(**kwargs)
 
+    def set_value(self, value):
+        """
+        Преобразовывает значение в сырое значение (которое хранится в экземпляре)
+        :param value:
+        :return:
+        """
+        return value
+
+    def get_value(self, raw_value):
+        """
+        Преобразовывает сырое значение в несырое
+        :param raw_value:
+        :return:
+        """
+        return raw_value
+
+    def check_value(self, raw_value):
+        """
+        Преобразует сырое значение в значение для запроса
+        :param raw_value:
+        :return:
+        """
+        return str(raw_value)
+
 
 class VarChar2(Variable):
     _type_s = "VARCHAR2"
+
+    def check_value(self, value):
+        return "'{}'".format(str(value))
 
 
 class Number(Variable):

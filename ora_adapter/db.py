@@ -26,6 +26,11 @@ class Oracle:
 
     @classmethod
     def execute(cls, query: str):
+        """
+        Выполнить запрос в БД
+        :param query: строка запроса
+        :return:
+        """
         cursor = cls.instance.conn.cursor()
         print("Debug: `{}`".format(query))
         cursor.execute(query)
@@ -34,10 +39,18 @@ class Oracle:
 
     @classmethod
     def commit(cls):
+        """
+        Выгрузить данные в таблицу
+        :return:
+        """
         cls.instance.conn.commit()
 
     @classmethod
     def close(cls):
+        """
+        Закрыть соединение
+        :return:
+        """
         cls.instance.conn.close()
 
     @classmethod
