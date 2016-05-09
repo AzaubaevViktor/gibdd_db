@@ -1,0 +1,36 @@
+td {
+  padding: 3px 10px; }
+
+.progress {
+  position: fixed;
+  top: 0;
+  border-radius: 0;
+  box-shadow: 0 0 10px gray;
+  z-index: 1000; }
+  .progress .determinate {
+    transition: width .3s ease 0s; }
+
+.toast {
+  display: block; }
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Material Icons"), local("MaterialIcons-Regular"), url(/static/font/GoogleMaterial.woff2) format("woff2"); }
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -moz-font-feature-settings: 'liga';
+  -moz-osx-font-smoothing: grayscale; }
+
+/*# sourceMappingURL=my.css.map */

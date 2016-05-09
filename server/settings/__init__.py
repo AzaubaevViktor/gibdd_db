@@ -16,3 +16,4 @@ class Config:
     VERSION = " α"
 
     SEND_FILE_MAX_AGE_DEFAULT = 0
+

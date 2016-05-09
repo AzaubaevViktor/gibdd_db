@@ -1,0 +1,103 @@
+{% macro static(filename) -%}
+    {{ url_for('static', filename=filename) }}
+{%- endmacro %}
+
+{% macro icon(name, pos="") -%}
+    <i class="material-icons {{ pos }}">{{ name }}</i>
+{% endmacro %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="{{ static('css/materialize.css') }}"  media="screen,projection"/>
+    {#        Import my stylescheet #}
+    <link type="text/css" rel="stylesheet" href="{{ static('css/my.css') }}"  media="screen,projection"/>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+<div class="progress" id="progress" style="margin-top: 0">
+    <div class="determinate"  style="width: 0%"></div>
+</div>
+
+<nav>
+    <div class="nav-wrapper blue" id="breadcrumb" style="transition: background-color 1s ease 0s;">
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li>
+                <a class='dropdown-button' data-activates='login-dropdown'
+                   style="min-width: 15em; text-align: right;">
+                    {{ icon('person', 'right') }}
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div id="main-div" class="row container" style="padding-top: 15px;">
+    <div class="col s12" id="container">
+        {% block body %}{% endblock %}
+    </div>
+</div>
+<div id="main-table" class="row" style="">
+    <div class="col s12" id="table-container">
+        {% block tables %}{% endblock %}
+    </div>
+</div>
+
+    {# Floating button #}
+    <div id="fb-div" class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+        <a id="fb-a" class="btn-floating btn-large waves-effect blue">
+            <i class="large material-icons">mode_edit</i>
+        </a>
+        <ul id="fb-buttons"></ul>
+    </div>
+
+{# Modal #}
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <h4 id="modal-header"></h4>
+        <p id="modal-text"></p>
+    </div>
+    <div class="modal-footer">
+        <a class=" modal-action modal-close waves-effect waves-red btn-flat">Ну нахер</a>
+        <a id="modal-agree" class=" modal-action modal-close waves-effect waves-green btn-flat">Поехали</a>
+    </div>
+</div>
+
+<!--Import jQuery before materialize.js-->
+
+<script type="text/javascript" src="{{ static('js/jquery-2.1.1.js') }}"></script>
+<script type="text/javascript" src="{{ static('js/bin/materialize.min.js') }}"></script>
+
+<script type="text/javascript" src="{{ static('js/logic/utils/get_browser.js') }}"></script>
+<script type="text/javascript" src="{{ static('js/logic/utils/parseuri.js') }}"></script>
+<script type="text/javascript" src="{{ static('js/logic/utils/date_diff.js') }}"></script>
+<script type="text/javascript" src="{{ static('js/logic/utils/ajax.js') }}"></script>
+<script type="text/javascript" src="{{ static('js/logic/utils/delayed_send.js') }}"></script>
+
+
+<script type="text/javascript" src="{{ static('js/logic/helpers/dom.js') }}"></script>
+<script type="text/javascript" src="{{ static('js/logic/helpers/progress.js') }}"></script>
+<script type="text/javascript" src="{{ static('js/logic/helpers/collection.js') }}"></script>
+<script type="text/javascript" src="{{ static('js/logic/helpers/table.js') }}"></script>
+<script type="text/javascript" src="{{ static('js/logic/helpers/schedule.js') }}"></script>
+<script type="text/javascript" src="{{ static('js/logic/helpers/form.js') }}"></script>
+<script type="text/javascript" src="{{ static('js/logic/helpers/event_handler_register.js') }}"></script>
+<script type="text/javascript" src="{{ static('js/logic/helpers/floating_button.js') }}"></script>
+<script type="text/javascript" src="{{ static('js/logic/helpers/modal.js') }}"></script>
+<script type="text/javascript" src="{{ static('js/logic/helpers/tooltip.js') }}"></script>
+<script type="text/javascript" src="{{ static('js/logic/helpers/breadcrumb.js') }}"></script>
+
+<script type="text/javascript" src="{{ static('js/logic/handlers/main.js') }}"></script>
+
+<script type="text/javascript">
+    window.handlers = {
+        main: mainHandler
+    };
+
+</script>
+
+<script type="text/javascript" src="{{ static('js/logic/all.js') }}"></script>
+</body>
+</html>
