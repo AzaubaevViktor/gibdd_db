@@ -1,3 +1,5 @@
+import traceback
+
 import cx_Oracle
 
 
@@ -23,6 +25,13 @@ class Oracle:
             Oracle.instance.disconnect()
             Oracle.instance.addr = addr
             Oracle.instance.connect()
+
+    @classmethod
+    def try_execute(cls, query: str):
+        try:
+            cls.execute(query)
+        except Exception as e:
+            traceback.print_exc()
 
     @classmethod
     def execute(cls, query: str):
