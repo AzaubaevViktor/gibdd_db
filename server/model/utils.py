@@ -4,6 +4,8 @@ import traceback
 
 import sys
 
+import cx_Oracle
+
 
 def _json_date_handler(obj):
     return obj.isoformat() if hasattr(obj, 'isoformat') else obj
@@ -43,6 +45,10 @@ class ErrorHandlerAndSend:
                 print(traceback.format_exc(), file=sys.stderr)
 
                 desc = str(e)
+
+                if isinstance(e, cx_Oracle.IntegrityError):
+                    if e.args[0].code == 1:
+                        desc = "Значение одного или нескольких полей повторяется"
 
                 answer = {'status': 'error',
                           'description': desc,

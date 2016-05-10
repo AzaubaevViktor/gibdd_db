@@ -1,5 +1,3 @@
-import json
-
 from flask import request
 
 from ora_adapter import Oracle
@@ -14,4 +12,3 @@ def vta():
     Oracle.execute("""
     INSERT INTO VehicleType(name) VALUES(:name)
     """, name=name).close()
-

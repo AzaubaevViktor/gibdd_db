@@ -47,6 +47,7 @@ class Oracle:
         print("Debug: `{}`:{}::{}".format(query, args, kwargs))
         cursor.execute(query, *args, **kwargs)
         print("Ok")
+        cls.commit()
         return cursor
 
     @classmethod
