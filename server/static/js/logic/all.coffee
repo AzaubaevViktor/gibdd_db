@@ -12,6 +12,11 @@ window.goto = (title, getParams) ->
   newPageHandler()
 
 
+window.gotoCallback = (title, getParams) ->
+  return ->
+    goto title, getParams
+
+
 newPageHandler = () ->
   EHR.unregistry()
   floatingButton.clear()

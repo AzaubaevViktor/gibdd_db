@@ -7,7 +7,7 @@
       this.div = $('#breadcrumb');
       this.items = [];
       this._push('БД ГИБДД', {
-        obj: 'schedule',
+        obj: 'main',
         act: 'show_all'
       });
     }

@@ -1,25 +1,24 @@
 from ora_adapter import Oracle
 
 
-
 Oracle.try_execute("""
 CREATE TABLE VehicleType (
     id INTEGER PRIMARY KEY,
-    name VARCHAR2(30) UNIQUE NOT NULL
+    name NVARCHAR2(30) UNIQUE NOT NULL
 )
 """)
 
 Oracle.try_execute("""
 CREATE TABLE CrashType (
     id INTEGER PRIMARY KEY,
-    name VARCHAR2(30) UNIQUE NOT NULL
+    name NVARCHAR2(30) UNIQUE NOT NULL
 )
 """)
 
 Oracle.try_execute("""
 CREATE TABLE VehicleFeatureType (
     id INTEGER PRIMARY KEY,
-    name VARCHAR2(30) UNIQUE NOT NULL,
+    name NVARCHAR2(30) UNIQUE NOT NULL,
     variable_type INTEGER
 )
 """)
@@ -28,8 +27,8 @@ Oracle.try_execute("""
 CREATE TABLE Person (
     id INTEGER PRIMARY KEY,
     is_organization NUMBER(1) DEFAULT 0,
-    full_name VARCHAR2(60) NOT NULL,
-    address VARCHAR2(60) NOT NULL,
+    full_name NVARCHAR2(60) NOT NULL,
+    address NVARCHAR2(60) NOT NULL,
     chief INTEGER
 )
 """)
@@ -38,7 +37,7 @@ Oracle.try_execute("""
 CREATE TABLE Vehicle (
     id INTEGER PRIMARY KEY,
     vehicle_type INTEGER REFERENCES VehicleType(id) NOT NULL,
-    reg_number VARCHAR2(10) NOT NULL,
+    reg_number NVARCHAR2(10) NOT NULL,
     chief INTEGER REFERENCES Person(id) NOT NULL
 )
 """)
@@ -49,7 +48,7 @@ CREATE TABLE FeatureVehicleLinks (
     vehicle_id INTEGER REFERENCES Vehicle(id) NOT NULL ,
     vehicle_feature_type_id INTEGER REFERENCES VehicleFeatureType(id) NOT NULL,
     value_date DATE,
-    data_str  VARCHAR2(100),
+    data_str  NVARCHAR2(100),
     data_int INTEGER,
     data_float FLOAT
 )
@@ -60,12 +59,12 @@ CREATE TABLE Crash (
     id INTEGER PRIMARY KEY,
     cdate DATE,
     crash_type INTEGER REFERENCES CrashType(id) NOT NULL,
-    address VARCHAR2(100) NOT NULL,
-    about VARCHAR2(1000) NOT NULL,
+    address NVARCHAR2(100) NOT NULL,
+    about NVARCHAR2(1000) NOT NULL,
     victims INTEGER,
     damage_cost NUMBER(*, 2),
-    cause VARCHAR2(100) NOT NULL,
-    road_condition VARCHAR2(100) NOT NULL
+    cause NVARCHAR2(100) NOT NULL,
+    road_condition NVARCHAR2(100) NOT NULL
 )
 """)
 

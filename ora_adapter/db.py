@@ -1,4 +1,7 @@
+import os
 import traceback
+
+os.environ['NLS_LANG'] = 'RUSSIAN_RUSSIA.AL32UTF8'
 
 import cx_Oracle
 
@@ -34,15 +37,15 @@ class Oracle:
             traceback.print_exc()
 
     @classmethod
-    def execute(cls, query: str):
+    def execute(cls, query: str, *args, **kwargs):
         """
         Выполнить запрос в БД
         :param query: строка запроса
         :return:
         """
         cursor = cls.instance.conn.cursor()
-        print("Debug: `{}`".format(query))
-        cursor.execute(query)
+        print("Debug: `{}`:{}::{}".format(query, args, kwargs))
+        cursor.execute(query, *args, **kwargs)
         print("Ok")
         return cursor
 

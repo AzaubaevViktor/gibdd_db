@@ -1,1 +1,2 @@
-from .view import *
+from .main import *
+from .vehicleType import *

@@ -65,7 +65,7 @@
     </div>
 </div>
 
-<!--Import jQuery before materialize.js-->
+<!--Importing-->
 
 <script type="text/javascript" src="{{ static('js/jquery-2.1.1.js') }}"></script>
 <script type="text/javascript" src="{{ static('js/bin/materialize.min.js') }}"></script>
@@ -81,7 +81,6 @@
 <script type="text/javascript" src="{{ static('js/logic/helpers/progress.js') }}"></script>
 <script type="text/javascript" src="{{ static('js/logic/helpers/collection.js') }}"></script>
 <script type="text/javascript" src="{{ static('js/logic/helpers/table.js') }}"></script>
-<script type="text/javascript" src="{{ static('js/logic/helpers/schedule.js') }}"></script>
 <script type="text/javascript" src="{{ static('js/logic/helpers/form.js') }}"></script>
 <script type="text/javascript" src="{{ static('js/logic/helpers/event_handler_register.js') }}"></script>
 <script type="text/javascript" src="{{ static('js/logic/helpers/floating_button.js') }}"></script>
@@ -90,10 +89,12 @@
 <script type="text/javascript" src="{{ static('js/logic/helpers/breadcrumb.js') }}"></script>
 
 <script type="text/javascript" src="{{ static('js/logic/handlers/main.js') }}"></script>
+<script type="text/javascript" src="{{ static('js/logic/handlers/vehicle_type.js') }}"></script>
 
 <script type="text/javascript">
     window.handlers = {
-        main: mainHandler
+        main: mainHandler,
+        vehicleType: vehicleTypeHandler
     };
 
 </script>

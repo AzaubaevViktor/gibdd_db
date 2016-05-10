@@ -2,7 +2,7 @@ class BreadCrumb
   constructor: ->
     @div = $ '#breadcrumb'
     @items = []
-    @_push 'БД ГИБДД', obj:'schedule', act:'show_all'
+    @_push 'БД ГИБДД', obj:'main', act:'show_all'
 
   _push: (name, params) ->
     item = a 'breadcrumb', name, ->

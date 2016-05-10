@@ -21,6 +21,12 @@
     return newPageHandler();
   };
 
+  window.gotoCallback = function(title, getParams) {
+    return function() {
+      return goto(title, getParams);
+    };
+  };
+
   newPageHandler = function() {
     var handler, head, p, params, uri;
     EHR.unregistry();
