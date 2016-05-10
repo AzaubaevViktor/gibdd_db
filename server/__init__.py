@@ -12,8 +12,14 @@ app = Flask(__name__)
 app.config.from_object('settings.Config')
 app.jinja_env.line_statement_prefix = Config.LINE_STATEMENT_PREFIX
 
-app.url_map.add(Rule("/vehicleType/add", endpoint="vta", methods=['POST']))
+# VehicleType
+# view
 app.url_map.add(Rule("/vehicleType/show_all", endpoint="vtsa", methods=['GET']))
+# controller
+app.url_map.add(Rule("/vehicleType/add", endpoint="vta", methods=['POST']))
+app.url_map.add(Rule("/vehicleType/delete", endpoint="vtd", methods=['POST']))
+app.url_map.add(Rule("/vehicleType/edit", endpoint="vte", methods=['POST']))
+
 
 from .model import *
 from .view import *

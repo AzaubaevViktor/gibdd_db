@@ -1,6 +1,5 @@
 from flask import render_template
 
-from ora_adapter import Oracle
 from server import app
 
 

@@ -6,7 +6,7 @@
     if (title == null) {
       title = 'Неизвестная страница';
     }
-    return document.title = "Расписания СТОПП: " + title;
+    return document.title = "ГИБДД ДБ: " + title;
   };
 
   window.goto = function(title, getParams) {

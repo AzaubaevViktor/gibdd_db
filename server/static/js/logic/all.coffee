@@ -1,6 +1,6 @@
 window.setTitle = (title) ->
   title ?= 'Неизвестная страница'
-  document.title = "Расписания СТОПП: #{title}"
+  document.title = "ГИБДД ДБ: #{title}"
 
 
 window.goto = (title, getParams) ->
