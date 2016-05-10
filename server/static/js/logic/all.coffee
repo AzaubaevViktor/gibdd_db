@@ -36,6 +36,7 @@ newPageHandler = () ->
   container.empty()
   tableContainer.empty()
   if typeof handler == 'function'
+    params.act ?= 'show_all'
     handler params
   else
     head = tag 'h4', '', 'Страница не найдена'

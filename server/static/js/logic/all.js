@@ -48,6 +48,9 @@
     container.empty();
     tableContainer.empty();
     if (typeof handler === 'function') {
+      if (params.act == null) {
+        params.act = 'show_all';
+      }
       return handler(params);
     } else {
       head = tag('h4', '', 'Страница не найдена');

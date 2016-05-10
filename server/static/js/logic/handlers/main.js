@@ -6,8 +6,12 @@
       case 'show_all':
         coll = new Collection(container);
         coll.addLine("Транспортные средства", null);
-        coll.addLine("Типы ТС", gotoCallback('Типы ТС', {
+        coll.addLine("Типы ТС", gotoCallback(null, {
           obj: 'vehicleType',
+          act: 'show_all'
+        }));
+        coll.addLine("Типы Параметров ТС", gotoCallback(null, {
+          obj: 'vehicleFeatureType',
           act: 'show_all'
         }));
         coll.addLine("Параметры ТС", null);

@@ -20,6 +20,12 @@ app.url_map.add(Rule("/vehicleType/add", endpoint="vta", methods=['POST']))
 app.url_map.add(Rule("/vehicleType/delete", endpoint="vtd", methods=['POST']))
 app.url_map.add(Rule("/vehicleType/edit", endpoint="vte", methods=['POST']))
 
+# VehicleFeatureType
+# view
+app.url_map.add(Rule("/vehicleFeatureType/show_all", endpoint="vftsa", methods=['GET']))
+# controller
+app.url_map.add(Rule("/vehicleFeatureType/add_edit", endpoint="vftae", methods=['POST']))
+app.url_map.add(Rule("/vehicleFeatureType/delete", endpoint="vftd", methods=['POST']))
 
 from .model import *
 from .view import *
