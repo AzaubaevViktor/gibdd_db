@@ -5,6 +5,9 @@ window.tag = (name, cls="", data="", attrs={}) ->
   el
 
 
+window.p = (text) ->
+  tag "p", '', data=text
+
 window.a = (cls, data, handler) ->
   _a = tag 'a', cls, data
   if typeof handler == 'function'

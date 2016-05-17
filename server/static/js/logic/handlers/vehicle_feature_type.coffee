@@ -32,8 +32,10 @@ window.vehicleFeatureTypeHandler = (params) ->
     when 'show_all'
       coll = new Collection container, false
       AJAXLoad params, (data) ->
-        for vehicleFeatureType in data.vehicleFeatureTypes
+        for id, vehicleFeatureType of data.vehicleFeatureTypes
+          vehicleFeatureType.id = id
           coll.addLine generateLine vehicleFeatureType
+        null
 
       setTitle 'Типы параметров ТС'
       breadcrumb.push 'Типы параметров ТС', params

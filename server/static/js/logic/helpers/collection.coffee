@@ -1,5 +1,5 @@
 class Collection
-  constructor: (@parent, @aType=true) ->
+  constructor: (@parent, @aType=true, @avatar=false) ->
 
     @collection = if @aType then div 'collection' else tag 'ul', 'collection'
     @parent.append @collection
@@ -9,9 +9,17 @@ class Collection
       el = a 'collection-item row', data, handler
       @collection.append el
     else
-      el = tag 'li', 'collection-item', (div '', data)
+      el = tag 'li', 'collection-item', data
+      if @avatar
+        el.addClass('avatar')
       @collection.append el
 
+  addAvatarLine: (title, about, secondaryContent) ->
+    @addLine [
+      tag('span', 'title', title),
+      p(about),
+      div 'secondary-content', secondaryContent
+    ]
 
   remove: () ->
     @collection.remove()

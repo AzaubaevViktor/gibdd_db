@@ -3,9 +3,10 @@
   var Collection;
 
   Collection = (function() {
-    function Collection(parent, aType) {
+    function Collection(parent, aType, avatar) {
       this.parent = parent;
       this.aType = aType != null ? aType : true;
+      this.avatar = avatar != null ? avatar : false;
       this.collection = this.aType ? div('collection') : tag('ul', 'collection');
       this.parent.append(this.collection);
     }
@@ -16,9 +17,16 @@
         el = a('collection-item row', data, handler);
         return this.collection.append(el);
       } else {
-        el = tag('li', 'collection-item', div('', data));
+        el = tag('li', 'collection-item', data);
+        if (this.avatar) {
+          el.addClass('avatar');
+        }
         return this.collection.append(el);
       }
+    };
+
+    Collection.prototype.addAvatarLine = function(title, about, secondaryContent) {
+      return this.addLine([tag('span', 'title', title), p(about), div('secondary-content', secondaryContent)]);
     };
 
     Collection.prototype.remove = function() {

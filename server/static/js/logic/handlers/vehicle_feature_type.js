@@ -59,14 +59,14 @@
       case 'show_all':
         coll = new Collection(container, false);
         AJAXLoad(params, function(data) {
-          var i, len, ref, results, vehicleFeatureType;
+          var id, ref, vehicleFeatureType;
           ref = data.vehicleFeatureTypes;
-          results = [];
-          for (i = 0, len = ref.length; i < len; i++) {
-            vehicleFeatureType = ref[i];
-            results.push(coll.addLine(generateLine(vehicleFeatureType)));
+          for (id in ref) {
+            vehicleFeatureType = ref[id];
+            vehicleFeatureType.id = id;
+            coll.addLine(generateLine(vehicleFeatureType));
           }
-          return results;
+          return null;
         });
         setTitle('Типы параметров ТС');
         breadcrumb.push('Типы параметров ТС', params);

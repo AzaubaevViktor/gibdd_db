@@ -17,6 +17,11 @@
     return el;
   };
 
+  window.p = function(text) {
+    var data;
+    return tag("p", '', data = text);
+  };
+
   window.a = function(cls, data, handler) {
     var _a;
     _a = tag('a', cls, data);

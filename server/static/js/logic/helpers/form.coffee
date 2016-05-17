@@ -23,10 +23,11 @@ class Form
     Materialize.updateTextFields();
     d
 
-  addOptionsField: (id, size, label) ->
+  addOptionsField: (id, size, label, disabled=false) ->
     # Возвращает функцию-добалятор опций
     d = div "input-field col #{size}"
     s = tag 'select', '', '', 'id':id
+    s.prop('disabled', disabled)
     Materialize.updateTextFields();
     @dataFields.push s
 
@@ -51,6 +52,9 @@ class Form
     @addEl d
     @checkBoxes.push d.find('input')
     d
+
+  find: (smth) ->
+    @form.find smth
 
   collectData: ->
     result = {}

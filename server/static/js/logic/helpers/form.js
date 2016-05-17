@@ -38,12 +38,16 @@
       return d;
     };
 
-    Form.prototype.addOptionsField = function(id, size, label) {
+    Form.prototype.addOptionsField = function(id, size, label, disabled) {
       var addOptions, d, l, s;
+      if (disabled == null) {
+        disabled = false;
+      }
       d = div("input-field col " + size);
       s = tag('select', '', '', {
         'id': id
       });
+      s.prop('disabled', disabled);
       Materialize.updateTextFields();
       this.dataFields.push(s);
       addOptions = function(options, selected) {
@@ -76,6 +80,10 @@
       this.addEl(d);
       this.checkBoxes.push(d.find('input'));
       return d;
+    };
+
+    Form.prototype.find = function(smth) {
+      return this.form.find(smth);
     };
 
     Form.prototype.collectData = function() {
