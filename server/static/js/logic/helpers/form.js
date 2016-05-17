@@ -9,6 +9,7 @@
       });
       this.curRow = null;
       this.dataFields = [];
+      this.checkBoxes = [];
       this.main = div('row', this.form);
       if (parent != null) {
         parent.append(this.main);
@@ -65,13 +66,30 @@
       return addOptions;
     };
 
+    Form.prototype.addCheckBox = function(id, size, label, value) {
+      var d;
+      if (value == null) {
+        value = false;
+      }
+      d = inputField(id, 'checkbox', size, label, value);
+      d.find('input').prop('checked', !!value);
+      this.addEl(d);
+      this.checkBoxes.push(d.find('input'));
+      return d;
+    };
+
     Form.prototype.collectData = function() {
-      var dataField, i, len, ref, result;
+      var checkBox, dataField, i, j, len, len1, ref, ref1, result;
       result = {};
       ref = this.dataFields;
       for (i = 0, len = ref.length; i < len; i++) {
         dataField = ref[i];
         result[dataField.attr('id')] = dataField.val();
+      }
+      ref1 = this.checkBoxes;
+      for (j = 0, len1 = ref1.length; j < len1; j++) {
+        checkBox = ref1[j];
+        result[checkBox.attr('id')] = checkBox.prop('checked');
       }
       return result;
     };

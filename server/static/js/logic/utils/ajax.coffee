@@ -47,9 +47,13 @@ window.AJAXSend = (params, data, handler) ->
       else
         if handler
           handler(data)
-    error: () ->
+    error: (jqXHR, textStatus, errorThrown) ->
       progress.setProgress 0
       progress.setColor 'red'
+      msg = "<b>При выполнении запроса произошла ошибка сервера:</b><br>#{textStatus}<br>#{errorThrown}"
+      sec = (($ msg).text().length / 20 + 4) * 1000
+      Materialize.toast msg, sec.toFixed()
+      console.error textStatus, errorThrown
 
 
 window.AJAXLoad = (params, handler) ->

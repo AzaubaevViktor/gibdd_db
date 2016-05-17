@@ -3,6 +3,7 @@ class Form
     @form = tag 'form', "col #{size}", '', 'id':id
     @curRow = null
     @dataFields = []
+    @checkBoxes = []
     @main = div 'row', @form
     parent?.append @main
     @addRow()
@@ -44,10 +45,21 @@ class Form
     @addEl d
     return addOptions
 
+  addCheckBox: (id, size, label, value=false) ->
+    d = inputField id, 'checkbox', size, label, value
+    d.find('input').prop 'checked', !!value
+    @addEl d
+    @checkBoxes.push d.find('input')
+    d
+
   collectData: ->
     result = {}
     for dataField in @dataFields
       result[dataField.attr 'id'] = dataField.val()
+
+    for checkBox in @checkBoxes
+      result[checkBox.attr 'id'] = checkBox.prop('checked')
+
     return result
 
 

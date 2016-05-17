@@ -43,7 +43,7 @@ CREATE TABLE Vehicle (
 """)
 
 Oracle.try_execute("""
-CREATE TABLE FeatureVehicleLinks (
+CREATE TABLE VehicleFeatureLink (
     id INTEGER PRIMARY KEY,
     vehicle_id INTEGER REFERENCES Vehicle(id) NOT NULL ,
     vehicle_feature_type_id INTEGER REFERENCES VehicleFeatureType(id) NOT NULL,
@@ -51,6 +51,14 @@ CREATE TABLE FeatureVehicleLinks (
     data_str  NVARCHAR2(100),
     data_int INTEGER,
     data_float FLOAT
+)
+""")
+
+Oracle.try_execute("""
+CREATE TABLE VehicleTypeFeatureTypeLink (
+    id INTEGER PRIMARY KEY,
+    vehicle_type_id INTEGER REFERENCES VehicleType(id) NOT NULL ,
+    vehicle_feature_type_id INTEGER REFERENCES VehicleFeatureType(id) NOT NULL
 )
 """)
 
@@ -82,7 +90,8 @@ CREATE TABLE FreeRegNum (
     id INTEGER PRIMARY KEY,
     vehicle_type INTEGER REFERENCES VehicleType(id) NOT NULL,
     sta INTEGER NOT NULL,
-    end INTEGER NOT NULL
+    end INTEGER NOT NULL,
+    region INTEGER NOT NULL
 )
 """)
 
@@ -93,7 +102,8 @@ databases = [
     "VehicleFeatureType",
     "Person",
     "Vehicle",
-    "FeatureVehicleLinks",
+    "VehicleFeatureLink",
+    "VehicleTypeFeatureTypeLink",
     "Crash",
     "Searching",
     "FreeRegNum"

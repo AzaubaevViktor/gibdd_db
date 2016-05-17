@@ -4,9 +4,9 @@ window.mainHandler = (params) ->
       coll = new Collection container
 
       coll.addLine "Транспортные средства", null
-      coll.addLine "Типы ТС", gotoCallback null, obj:'vehicleType', act:'show_all'
-      coll.addLine "Типы Параметров ТС", gotoCallback null, obj:'vehicleFeatureType', act:'show_all'
-      coll.addLine "Параметры ТС", null
+      coll.addLine "Типы ТС", gotoCallback null, obj:'vehicleType'
+      coll.addLine "Типы Параметров ТС", gotoCallback null, obj:'vehicleFeatureType'
+      coll.addLine "Параметры ТС", gotoCallback null, obj:'vehicleTypeFeatureTypeLinks'
       coll.addLine "Водители", null
       coll.addLine "Организации", null
       coll.addLine "ДТП", null

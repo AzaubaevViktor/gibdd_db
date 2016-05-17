@@ -5,23 +5,55 @@ from server import app
 from server.model import ErrorHandlerAndSend
 
 
-@app.endpoint("vta")
+@app.endpoint("vtae")
 @ErrorHandlerAndSend(app)
-def vta():
+def vtae():
+    vt_id = request.form.get('id')  # type: int
     name = request.form.get('name')  # type: str
+
+    query_feature_inserts = []
+    for k, v in request.form.items():
+        if 'vft_' == k[:4]:
+            if not (v == 'false'):
+                query_feature_inserts.append("""
+                INSERT INTO
+                VehicleTypeFeatureTypeLink(vehicle_type_id, vehicle_feature_type_id)
+                VALUES(:vt_id, {})
+                """.format(k[4:]))
+
+    if not vt_id:
+        Oracle.execute("""
+        INSERT INTO VehicleType(name) VALUES(:name)
+        """, name=name).close()
+        cursor = Oracle.execute("""
+        SELECT id FROM VehicleType WHERE name=:name
+        """, name=name)
+        vt_id = cursor.fetchone()[0]
+        cursor.close()
+    else:
+        Oracle.execute("""
+            UPDATE VehicleType
+            SET name=:name
+            WHERE id=:id
+            """, id=vt_id, name=name).close()
+
     Oracle.execute("""
-    INSERT INTO VehicleType(name) VALUES(:name)
-    """, name=name).close()
+    DELETE FROM VehicleTypeFeatureTypeLink WHERE vehicle_type_id=:vt_id
+    """, vt_id=int(vt_id)).close()
+    for query in query_feature_inserts:
+        Oracle.execute(query, vt_id=int(vt_id)).close()
 
 
 @app.endpoint("vtd")
 @ErrorHandlerAndSend(app)
 def vtd():
-    _id = request.form.get('id')
+    vt_id = request.form.get('id')
     Oracle.execute("""
     DELETE FROM VehicleType
-    WHERE id=:id
-    """, id=_id).close()
+    WHERE id=:vt_id;
+    DELETE FROM VehicleTypeFeatureTypeLink
+    WHERE vehicle_type_id=:vt_id;
+    """, vt_id=vt_id).close()
 
 
 @app.endpoint("vte")

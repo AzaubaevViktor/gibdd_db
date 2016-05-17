@@ -1,4 +1,4 @@
-typesList = ['Дата', 'Строка', 'Число', 'Дробное число']
+window.featureTypesList = ['Дата', 'Строка', 'Число', 'Дробное число']
 
 initModal = (vehicleFeatureType={}) ->
   modal.clear()
@@ -6,7 +6,7 @@ initModal = (vehicleFeatureType={}) ->
   form = new Form 'new-vehicleFeatureType', 's12', modal.text
   form.addInputField 'name', 'text', 's6', 'Название', vehicleFeatureType.name
   addOptions = form.addOptionsField 'variable_type', 's6', 'Тип параметра'
-  addOptions typesList, vehicleFeatureType.variable_type ? 2
+  addOptions featureTypesList, vehicleFeatureType.variable_type ? 2
   modal.setAgreeHandler ->
     data = form.collectData()
     data.id = vehicleFeatureType.id
@@ -23,7 +23,7 @@ generateLine = (vehicleFeatureType) ->
     initModal vehicleFeatureType
     modal.show()
   return [
-    "#{vehicleFeatureType.name} (#{typesList[vehicleFeatureType.variable_type]})",
+    "#{vehicleFeatureType.name} (#{featureTypesList[vehicleFeatureType.variable_type]})",
     btnDelete,
     btnEdit]
 

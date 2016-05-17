@@ -69,9 +69,14 @@
           }
         }
       },
-      error: function() {
+      error: function(jqXHR, textStatus, errorThrown) {
+        var msg, sec;
         progress.setProgress(0);
-        return progress.setColor('red');
+        progress.setColor('red');
+        msg = "<b>При выполнении запроса произошла ошибка сервера:</b><br>" + textStatus + "<br>" + errorThrown;
+        sec = (($(msg)).text().length / 20 + 4) * 1000;
+        Materialize.toast(msg, sec.toFixed());
+        return console.error(textStatus, errorThrown);
       }
     });
   };

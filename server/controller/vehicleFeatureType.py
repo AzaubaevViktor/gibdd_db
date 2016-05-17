@@ -27,8 +27,10 @@ def vftae():
 @app.endpoint("vftd")
 @ErrorHandlerAndSend(app)
 def vftd():
-    _id = request.form.get('id')
+    vft_id = request.form.get('id')
     Oracle.execute("""
     DELETE FROM VehicleFeatureType
-    WHERE id=:id
-    """, id=_id).close()
+    WHERE id=:vft_id;
+    DELETE FROM VehicleTypeFeatureTypeLink
+    WHERE vehicle_feature_type_id=:vft_id;
+    """, vft_id=vft_id).close()
