@@ -25,11 +25,17 @@ def vtae():
         Oracle.execute("""
         INSERT INTO VehicleType(name) VALUES(:name)
         """, name=name).close()
+
         cursor = Oracle.execute("""
         SELECT id FROM VehicleType WHERE name=:name
         """, name=name)
         vt_id = cursor.fetchone()[0]
         cursor.close()
+
+        Oracle.execute("""
+        INSERT INTO FreeRegNum(vehicle_type_id, sta, end)
+        VALUES(:vt_id, 0, 11390625)
+        """, vt_id=vt_id).close()
     else:
         Oracle.execute("""
             UPDATE VehicleType
@@ -49,10 +55,16 @@ def vtae():
 def vtd():
     vt_id = request.form.get('id')
     Oracle.execute("""
-    DELETE FROM VehicleType
-    WHERE id=:vt_id;
     DELETE FROM VehicleTypeFeatureTypeLink
-    WHERE vehicle_type_id=:vt_id;
+    WHERE vehicle_type_id=:vt_id
+    """, vt_id=vt_id).close()
+    Oracle.execute("""
+    DELETE FROM FreeRegNum
+    WHERE vehicle_type_id=:vt_id
+    """, vt_id=vt_id)
+    Oracle.execute("""
+    DELETE FROM VehicleType
+    WHERE id=:vt_id
     """, vt_id=vt_id).close()
 
 
