@@ -12,18 +12,18 @@ def pae():
     is_organization = bool(int(request.form.get('is_organization'))) # type: bool
     full_name = request.form.get('full_name')  # type: str
     address = request.form.get('address')  # type: str
-    chief = request.form.get('chief')
-    if '-1' == chief:
-        chief = None
+    chief_id = request.form.get('chief_id')
+    if '-1' == chief_id:
+        chief_id = None
 
     if not p_id:
         Oracle.execute("""
-        INSERT INTO Person(is_organization, full_name, address, chief)
-        VALUES (:is_organization, :full_name, :address, :chief)
+        INSERT INTO Person(is_organization, full_name, address, chief_id)
+        VALUES (:is_organization, :full_name, :address, :chief_id)
         """, is_organization=is_organization,
                        full_name=full_name,
                        address=address,
-                       chief=chief)
+                       chief_id=chief_id)
     else:
         Oracle.execute("""
         UPDATE Person
@@ -31,13 +31,13 @@ def pae():
           is_organization=:is_organization,
           full_name=:full_name,
           address=:address,
-          chief=:chief
+          chief_id=:chief_id
         WHERE id=:p_id
         """, p_id=p_id,
                        is_organization=is_organization,
                        full_name=full_name,
                        address=address,
-                       chief=chief
+                       chief_id=chief_id
                        ).close()
 
 
@@ -46,7 +46,7 @@ def pae():
 def pd():
     p_id = request.form.get('id')
     cursor = Oracle.execute("""
-    SELECT COUNT(*) FROM Person WHERE chief=:p_id
+    SELECT COUNT(*) FROM Person WHERE chief_id=:p_id
     """, p_id=p_id)
     childs = cursor.fetchone()[0]
     cursor.close()

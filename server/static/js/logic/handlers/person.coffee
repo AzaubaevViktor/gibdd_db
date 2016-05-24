@@ -9,9 +9,9 @@ initModal = (person={}) ->
   addOptions {0:'Человек', 1:'Организация'}, person.is_organization ? 0
   isOrgSelect = form.find '#is_organization'
 
-  addOptions = form.addOptionsField 'chief', 's6', 'Владелец', (person.is_organization ? 0) == 0
+  addOptions = form.addOptionsField 'chief_id', 's6', 'Владелец', (person.is_organization ? 0) == 0
   addOptions persons, person.chief ? -1
-  chiefSelect = form.find '#chief'
+  chiefSelect = form.find '#chief_id'
 
   isOrgSelect.change ->
     chiefSelect.prop('disabled', '0' == isOrgSelect.val())

@@ -29,7 +29,7 @@ CREATE TABLE Person (
     is_organization NUMBER(1) DEFAULT 0,
     full_name NVARCHAR2(60) NOT NULL,
     address NVARCHAR2(60) NOT NULL,
-    chief INTEGER
+    chief_id INTEGER
 )
 """)
 
@@ -38,7 +38,7 @@ CREATE TABLE Vehicle (
     id INTEGER PRIMARY KEY,
     vehicle_type INTEGER REFERENCES VehicleType(id) NOT NULL,
     reg_number NVARCHAR2(10) NOT NULL,
-    chief INTEGER REFERENCES Person(id) NOT NULL
+    chief_id INTEGER REFERENCES Person(id) NOT NULL
 )
 """)
 
@@ -79,6 +79,7 @@ CREATE TABLE Crash (
 Oracle.try_execute("""
 CREATE TABLE Searching (
     id INTEGER PRIMARY KEY,
+    vehicle_id INTEGER REFERENCES Vehicle(id) NOT NULL,
     is_stolen NUMBER(1) DEFAULT 0,
     announced DATE NOT NULL,
     found DATE
