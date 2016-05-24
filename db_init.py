@@ -6,5 +6,7 @@ Oracle(conn_str)
 
 from database_init import create_tables, index_auto
 
+create_tables.create()
+
 for table_name in create_tables.databases:
     index_auto.set_auto_increment(table_name, 'id')

@@ -30,9 +30,9 @@ class Oracle:
             Oracle.instance.connect()
 
     @classmethod
-    def try_execute(cls, query: str):
+    def try_execute(cls, query: str, *args, **kwargs):
         try:
-            cls.execute(query)
+            cls.execute(query, *args, **kwargs)
         except Exception as e:
             traceback.print_exc()
 
