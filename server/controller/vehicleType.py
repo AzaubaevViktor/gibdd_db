@@ -58,10 +58,7 @@ def vtd():
     DELETE FROM VehicleTypeFeatureTypeLink
     WHERE vehicle_type_id=:vt_id
     """, vt_id=vt_id).close()
-    Oracle.execute("""
-    DELETE FROM FreeRegNum
-    WHERE vehicle_type_id=:vt_id
-    """, vt_id=vt_id)
+
     Oracle.execute("""
     DELETE FROM VehicleType
     WHERE id=:vt_id

@@ -29,8 +29,11 @@ def vftae():
 def vftd():
     vft_id = request.form.get('id')
     Oracle.execute("""
-    DELETE FROM VehicleFeatureType
-    WHERE id=:vft_id;
     DELETE FROM VehicleTypeFeatureTypeLink
-    WHERE vehicle_feature_type_id=:vft_id;
+    WHERE vehicle_feature_type_id=:vft_id
+    """, vft_id=vft_id).close()
+
+    Oracle.execute("""
+    DELETE FROM VehicleFeatureType
+    WHERE id=:vft_id
     """, vft_id=vft_id).close()
