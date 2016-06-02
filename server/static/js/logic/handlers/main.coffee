@@ -9,6 +9,6 @@ window.mainHandler = (params) ->
 #      coll.addLine "Параметры ТС", gotoCallback null, obj:'vehicleTypeFeatureTypeLink'
       coll.addLine "Владельцы", gotoCallback null, obj:'person'
       coll.addLine "-ДТП", null
-      coll.addLine "-Типы ДТП", null
+      coll.addLine "Типы ДТП", gotoCallback null, obj:'crashType'
       coll.addLine "-РОЗЫСК", null
 

@@ -12,7 +12,7 @@ def create():
     Oracle.try_execute("""
     CREATE TABLE CrashType (
         id INTEGER PRIMARY KEY,
-        name NVARCHAR2(30) UNIQUE NOT NULL
+        name NVARCHAR2(70) UNIQUE NOT NULL
     )
     """)
 

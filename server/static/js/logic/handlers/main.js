@@ -18,7 +18,9 @@
           obj: 'person'
         }));
         coll.addLine("-ДТП", null);
-        coll.addLine("-Типы ДТП", null);
+        coll.addLine("Типы ДТП", gotoCallback(null, {
+          obj: 'crashType'
+        }));
         return coll.addLine("-РОЗЫСК", null);
     }
   };

@@ -49,6 +49,9 @@ class ErrorHandlerAndSend:
                 if isinstance(e, cx_Oracle.IntegrityError):
                     if e.args[0].code == 1:
                         desc = "Значение одного или нескольких полей повторяется"
+                    elif e.args[0].code == 2292:
+                        global desс
+                        desc = "С этим объектом есть связанные значения"
 
                 answer = {'status': 'error',
                           'description': desc,
