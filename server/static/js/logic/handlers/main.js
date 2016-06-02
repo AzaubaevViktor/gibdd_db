@@ -17,7 +17,9 @@
         coll.addLine("Владельцы", gotoCallback(null, {
           obj: 'person'
         }));
-        coll.addLine("-ДТП", null);
+        coll.addLine("ДТП", gotoCallback(null, {
+          obj: 'crash'
+        }));
         coll.addLine("Типы ДТП", gotoCallback(null, {
           obj: 'crashType'
         }));

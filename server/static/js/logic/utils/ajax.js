@@ -3,26 +3,21 @@
   var _AJAXMatching;
 
   _AJAXMatching = {
-    schedule: {
+    crash: {
       show: {
         pathGenerator: function(params) {
-          return "/schedule/show/" + params.id;
+          return "/crash/show/" + params.id;
         }
       }
     },
-    person: {
-      show: {
+    __obj: {
+      __act1: {
         pathGenerator: function(params) {
-          return "/person/show/" + params.id;
+          return "/path/to/" + params.id;
         }
-      }
-    },
-    account: {
-      login: {
-        pathGenerator: '/login'
       },
-      logout: {
-        pathGenerator: '/logout'
+      __act2: {
+        pathGenerator: "/path/to"
       }
     }
   };

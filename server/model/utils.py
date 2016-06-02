@@ -16,6 +16,10 @@ def render_answer(obj: dict, **kwargs) -> str:
     return json.dumps(kwargs, ensure_ascii=False, default=_json_date_handler).encode('utf-8')
 
 
+def expand_request(request) -> dict:
+    return {k: v for k, v in request.form.items()}
+
+
 INTEGRITY_STR = "Объект с таким именем существует;<br>" \
                 "ИЛИ невозможно удалить объект, так как он связан с другими объектами<br>" \
                 "(попробуйте удалить связанные объекты)<br>" \

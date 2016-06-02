@@ -51,6 +51,14 @@ app.url_map.add(Rule("/crashType/show_all", endpoint="ctsa", methods=['GET']))
 app.url_map.add(Rule("/crashType/add_edit", endpoint="ctae", methods=['POST']))
 app.url_map.add(Rule("/crashType/delete", endpoint="ctd", methods=['POST']))
 
+# Crash
+# view
+app.url_map.add(Rule("/crash/show_all", endpoint="csa", methods=['GET']))
+app.url_map.add(Rule("/crash/show/<int:c_id>", endpoint="cs", methods=['GET']))
+# controller
+app.url_map.add(Rule("/crash/add_edit", endpoint="cae", methods=['POST']))
+app.url_map.add(Rule("/crash/delete", endpoint="cd", methods=['POST']))
+
 from .model import *
 from .view import *
 from .controller import *

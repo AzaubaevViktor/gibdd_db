@@ -67,7 +67,7 @@ def create():
     CREATE TABLE Crash (
         id INTEGER PRIMARY KEY,
         cdate DATE,
-        crash_type INTEGER REFERENCES CrashType(id) NOT NULL,
+        crash_type_id INTEGER REFERENCES CrashType(id) NOT NULL,
         address NVARCHAR2(100) NOT NULL,
         about NVARCHAR2(1000) NOT NULL,
         victims INTEGER,

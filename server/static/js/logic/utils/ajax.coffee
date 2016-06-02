@@ -1,15 +1,12 @@
 _AJAXMatching =
-  schedule:
+  crash:
     show:
-      pathGenerator: (params) -> "/schedule/show/#{params.id}"
-  person:
-    show:
-      pathGenerator: (params) -> "/person/show/#{params.id}"
-  account:
-    login:
-      pathGenerator: '/login'
-    logout:
-      pathGenerator: '/logout'
+      pathGenerator: (params) -> "/crash/show/#{params.id}"
+  __obj:
+    __act1:
+      pathGenerator: (params) -> "/path/to/#{params.id}"
+    __act2:
+      pathGenerator: "/path/to"
 
 
 window.AJAXSend = (params, data, handler) ->
