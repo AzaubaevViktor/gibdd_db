@@ -5,7 +5,9 @@
     switch (params.act) {
       case 'show_all':
         coll = new Collection(container);
-        coll.addLine("-Транспортные средства", null);
+        coll.addLine("Транспортные средства", gotoCallback(null, {
+          obj: 'vehicle'
+        }));
         coll.addLine("Типы ТС", gotoCallback(null, {
           obj: 'vehicleType'
         }));

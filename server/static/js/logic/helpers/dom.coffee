@@ -28,14 +28,15 @@ window.row = ->
 window.icon = (name) ->
   tag 'i', 'material-icons', name
 
-
-window.inputField = (id, type, size, label, value="") ->
+window.inputFieldPlaceholder = (id, type, size, label, placeholder, value="") ->
   d = div "input-field col #{size}"
-  i = tag 'input', 'validate', '', 'id':id, 'type':type, 'value':value
+  i = tag 'input', 'validate', '', 'id':id, 'type':type, 'value':value, 'placeholder':placeholder
   l = tag 'label', '', label, 'for':id
   d.append [i, l]
   d
 
+window.inputField = (id, type, size, label, value="") ->
+  inputFieldPlaceholder id, type, size, label, '', value
 
 window.valignWrapper = (cls, innerTag) ->
   innerTag.addClass 'valign'

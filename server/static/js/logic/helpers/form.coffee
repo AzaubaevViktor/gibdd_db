@@ -16,11 +16,26 @@ class Form
     @curRow.append el
 
   addInputField: (id, type, size, label, value="") ->
-    d = inputField id, type, size, label, value
+    @addInputFieldPlaceholder id, type, size, label, '', value
+
+  addInputFieldPlaceholder: (id, type, size, label, placeholder, value="") ->
+    d = inputFieldPlaceholder id, type, size, label, placeholder, value
     @dataFields.push d.find 'input'
 
     @addEl d
     Materialize.updateTextFields();
+    d
+
+  addDatePicker: (id, size, label, value="") ->
+    d = inputField id, 'date', size, label, value
+    (d.find 'input').addClass 'datepicker'
+    @addEl d
+    @dataFields.push d
+    $('.datepicker').pickadate()
+    Materialize.updateTextFields(
+      selectMonths: true,
+      selectYears: 15,
+      format: 'dd-mm-yyyy' );
     d
 
   addOptionsField: (id, size, label, disabled=false) ->

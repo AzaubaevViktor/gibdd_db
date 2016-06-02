@@ -39,6 +39,11 @@ app.url_map.add(Rule("/person/show_all", endpoint="psa", methods=['GET']))
 app.url_map.add(Rule("/person/add_edit", endpoint="pae", methods=['POST']))
 app.url_map.add(Rule("/person/delete", endpoint="pd", methods=['POST']))
 
+# Vehicle
+app.url_map.add(Rule("/vehicle/show_all", endpoint="vsa", methods=['GET']))
+app.url_map.add(Rule("/vehicle/add_edit", endpoint="vae", methods=['POST']))
+app.url_map.add(Rule("/vehicle/delete", endpoint="vd", methods=['POST']))
+
 from .model import *
 from .view import *
 from .controller import *

@@ -19,4 +19,6 @@ def vftsa():
             'variable_type': row[2]
         }
 
+    cursor.close()
+
     return {'vehicleFeatureTypes': vehicle_feature_types}

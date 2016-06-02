@@ -23,7 +23,7 @@ def pae():
         """, is_organization=is_organization,
                        full_name=full_name,
                        address=address,
-                       chief_id=chief_id)
+                       chief_id=chief_id).close()
     else:
         Oracle.execute("""
         UPDATE Person

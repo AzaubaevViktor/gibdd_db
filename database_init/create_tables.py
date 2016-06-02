@@ -38,7 +38,7 @@ def create():
     CREATE TABLE Vehicle (
         id INTEGER PRIMARY KEY,
         vehicle_type INTEGER REFERENCES VehicleType(id) NOT NULL,
-        reg_number NVARCHAR2(10) NOT NULL,
+        reg_number NVARCHAR2(10) NOT NULL UNIQUE,
         chief_id INTEGER REFERENCES Person(id) NOT NULL
     )
     """)

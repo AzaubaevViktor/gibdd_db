@@ -52,7 +52,7 @@
     return tag('i', 'material-icons', name);
   };
 
-  window.inputField = function(id, type, size, label, value) {
+  window.inputFieldPlaceholder = function(id, type, size, label, placeholder, value) {
     var d, i, l;
     if (value == null) {
       value = "";
@@ -61,13 +61,21 @@
     i = tag('input', 'validate', '', {
       'id': id,
       'type': type,
-      'value': value
+      'value': value,
+      'placeholder': placeholder
     });
     l = tag('label', '', label, {
       'for': id
     });
     d.append([i, l]);
     return d;
+  };
+
+  window.inputField = function(id, type, size, label, value) {
+    if (value == null) {
+      value = "";
+    }
+    return inputFieldPlaceholder(id, type, size, label, '', value);
   };
 
   window.valignWrapper = function(cls, innerTag) {

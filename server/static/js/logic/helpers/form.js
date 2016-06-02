@@ -27,14 +27,39 @@
     };
 
     Form.prototype.addInputField = function(id, type, size, label, value) {
+      if (value == null) {
+        value = "";
+      }
+      return this.addInputFieldPlaceholder(id, type, size, label, '', value);
+    };
+
+    Form.prototype.addInputFieldPlaceholder = function(id, type, size, label, placeholder, value) {
       var d;
       if (value == null) {
         value = "";
       }
-      d = inputField(id, type, size, label, value);
+      d = inputFieldPlaceholder(id, type, size, label, placeholder, value);
       this.dataFields.push(d.find('input'));
       this.addEl(d);
       Materialize.updateTextFields();
+      return d;
+    };
+
+    Form.prototype.addDatePicker = function(id, size, label, value) {
+      var d;
+      if (value == null) {
+        value = "";
+      }
+      d = inputField(id, 'date', size, label, value);
+      (d.find('input')).addClass('datepicker');
+      this.addEl(d);
+      this.dataFields.push(d);
+      $('.datepicker').pickadate();
+      Materialize.updateTextFields({
+        selectMonths: true,
+        selectYears: 15,
+        format: 'dd-mm-yyyy'
+      });
       return d;
     };
 
