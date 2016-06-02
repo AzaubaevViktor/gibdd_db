@@ -59,6 +59,8 @@ def vae():
                     ),
                     'type': type(e).__name__}
 
+    cursor.close()
+
     if not v_id:
         Oracle.execute("""
         INSERT INTO Vehicle(VEHICLE_TYPE_ID, REG_NUMBER, chief_id)
@@ -67,9 +69,8 @@ def vae():
                        reg_number=reg_number,
                        chief_id=chief_id).close()
         cursor = Oracle.execute("""
-        SELECT id FROM Vehicle
-        WHERE reg_number=:reg_number
-        """, reg_number=reg_number)
+        SELECT MAX(id) FROM Vehicle
+        """)
 
         v_id = cursor.fetchone()[0]
         cursor.close()

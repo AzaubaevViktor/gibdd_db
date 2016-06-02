@@ -59,7 +59,7 @@ initModal = (vehicle = {}) ->
   addOptChief chOpts, vehicle.chief_id ? 0
 
   # Регистрационный номер
-  form.addInputField 'reg_number', 'text', 's6', 'Регистрационный номер', vehicle.reg_number ? '------'
+  form.addInputFieldPlaceholder 'reg_number', 'text', 's6', 'Регистрационный номер', 'Автоматический подбор', vehicle.reg_number ? ''
 
   # Фичи ТС
   addToFormByVFT(form, vehicle)
@@ -74,12 +74,16 @@ initModal = (vehicle = {}) ->
     AJAXSend obj: 'vehicle', act:'add_edit', data, (data) ->
       goto null, obj:'vehicle', act:'show_all'
 
-tryInitAll = () ->
+tryInitAll = (coll) ->
   # Показывает всё, только если загрузились все три штуки
   if (vehicle_types? && persons? && vehicles? && vehicle_feature_types?)
     floatingButton.addButton 'add', 'green', 'Добавить машину', ->
       initModal()
       modal.show()
+
+    for id, vehicle of vehicles
+        vehicle.id = id
+        generateLine coll, vehicle
 
 generateLine = (coll, vehicle) ->
   btnDelete = a '', icon('delete'), ->
@@ -114,20 +118,16 @@ window.vehicleHandler = (params) ->
 
       AJAXLoad {obj: 'vehicleType', act: 'show_all'}, (data) ->
         vehicle_types = data.vehicleTypes
-        tryInitAll()
+        tryInitAll(coll)
       AJAXLoad {obj: 'vehicleFeatureType', act:'show_all'}, (data) ->
         vehicle_feature_types = data.vehicleFeatureTypes
-        tryInitAll()
+        tryInitAll(coll)
       AJAXLoad {obj: 'person', act: 'show_all'}, (data) ->
         persons = data.persons
-        tryInitAll()
+        tryInitAll(coll)
       AJAXLoad params, (data) ->
         vehicles = data.vehicles
-        tryInitAll()
-        for id, vehicle of data.vehicles
-          vehicle.id = id
-          generateLine coll, vehicle
-
+        tryInitAll(coll)
 
       setTitle 'Машины'
       breadcrumb.push 'Машины', params

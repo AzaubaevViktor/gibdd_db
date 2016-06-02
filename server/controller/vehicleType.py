@@ -31,11 +31,6 @@ def vtae():
         """, name=name)
         vt_id = cursor.fetchone()[0]
         cursor.close()
-
-        Oracle.execute("""
-        INSERT INTO FreeRegNum(vehicle_type_id, sta, end)
-        VALUES(:vt_id, 0, 11390625)
-        """, vt_id=vt_id).close()
     else:
         Oracle.execute("""
             UPDATE VehicleType
