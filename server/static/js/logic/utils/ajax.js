@@ -10,6 +10,20 @@
         }
       }
     },
+    person: {
+      show: {
+        pathGenerator: function(params) {
+          return "/" + params.obj + "/" + params.act + "/" + params.id;
+        }
+      }
+    },
+    vehicle: {
+      show: {
+        pathGenerator: function(params) {
+          return "/" + params.obj + "/" + params.act + "/" + params.id;
+        }
+      }
+    },
     __obj: {
       __act1: {
         pathGenerator: function(params) {

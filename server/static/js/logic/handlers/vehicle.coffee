@@ -94,17 +94,49 @@ generateLine = (coll, vehicle) ->
     initModal vehicle
     modal.show()
 
+  btnInfo = a '', icon('info'), ->
+    vehicleInfoModal vehicle.id
+    modal.show()
+
   featuresStr = ""
   for id, feature of vehicle.features
     featuresStr += "<b>#{vehicle_feature_types[id].name}:</b> #{feature}<br>"
 
   coll.addAvatarLine "#{vehicle.reg_number}",
-    "<b>Владелец:</b> #{vehicle.c_name}<br>
-     <b>Тип ТС:</b> #{vehicle.vt_name}<br>
-     #{featuresStr}",
-    [btnEdit, btnDelete]
+    ["<b>Владелец:</b> ",
+      a('', vehicle.c_name, ->
+        personInfoModal vehicle.chief_id
+        modal.show()
+      )
+      ,
+     "<br><b>Тип ТС:</b> #{vehicle.vt_name}<br>
+     #{featuresStr}"]
+    , [btnInfo, btnEdit, btnDelete]
   return
 
+window.vehicleInfoModal = (v_id) ->
+  modal.clear()
+  modal.header.text 'Загружаем информацию...'
+  modal.text.text 'Это займёт некоторое время'
+  AJAXLoad {obj: 'vehicle', act: 'show', id: v_id}, (vehicle) ->
+    modal.clear()
+    modal.header.text vehicle.reg_number
+    chief = a('', vehicle.c_name, ->
+      personInfoModal vehicle.chief_id
+    )
+    modal.text.append "<b>Владелец:</b> "
+    modal.text.append chief
+    modal.text.append "<br><b>Тип ТС:</b> #{vehicle.vt_name}<br>"
+
+    for id, feature of vehicle.features
+      modal.text.append "<b>#{feature.name}:</b> #{feature.data}<br>"
+
+    if 0 == vehicle.crashes.length
+      modal.text.append "В ДТП не участвовал"
+    else
+      modal.text.append "<b>ДТП:</b><br>"
+      for crash in vehicle.crashes
+        modal.text.append "* #{crash}<br>"
 
 window.vehicleHandler = (params) ->
   switch params.act

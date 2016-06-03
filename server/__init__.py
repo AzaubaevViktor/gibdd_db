@@ -36,11 +36,15 @@ app.url_map.add(Rule("/vehicleTypeFeatureTypeLinks/delete", endpoint="vtftld", m
 
 # Person
 app.url_map.add(Rule("/person/show_all", endpoint="psa", methods=['GET']))
+app.url_map.add(Rule("/person/show/<int:p_id>", endpoint="ps", methods=['GET']))
+
 app.url_map.add(Rule("/person/add_edit", endpoint="pae", methods=['POST']))
 app.url_map.add(Rule("/person/delete", endpoint="pd", methods=['POST']))
 
 # Vehicle
 app.url_map.add(Rule("/vehicle/show_all", endpoint="vsa", methods=['GET']))
+app.url_map.add(Rule("/vehicle/show/<int:v_id>", endpoint="vs", methods=['GET']))
+
 app.url_map.add(Rule("/vehicle/add_edit", endpoint="vae", methods=['POST']))
 app.url_map.add(Rule("/vehicle/delete", endpoint="vd", methods=['POST']))
 

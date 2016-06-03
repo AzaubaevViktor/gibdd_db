@@ -45,6 +45,8 @@ def pae():
 @ErrorHandlerAndSend(app)
 def pd():
     p_id = request.form.get('id')
+
+    # Так, потому что сделать всё это в триггерах слишком сложно
     cursor = Oracle.execute("""
     SELECT COUNT(*) FROM Person WHERE chief_id=:p_id
     """, p_id=p_id)

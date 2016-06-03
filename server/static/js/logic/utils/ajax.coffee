@@ -2,6 +2,12 @@ _AJAXMatching =
   crash:
     show:
       pathGenerator: (params) -> "/crash/show/#{params.id}"
+  person:
+    show:
+      pathGenerator: (params) -> "/#{params.obj}/#{params.act}/#{params.id}"
+  vehicle:
+    show:
+      pathGenerator: (params) -> "/#{params.obj}/#{params.act}/#{params.id}"
   __obj:
     __act1:
       pathGenerator: (params) -> "/path/to/#{params.id}"

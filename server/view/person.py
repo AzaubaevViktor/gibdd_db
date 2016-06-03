@@ -30,5 +30,47 @@ def psa():
 
     cursor.close()
 
-
     return {'persons': persons}
+
+
+@app.endpoint('ps')
+@ErrorHandlerAndSend(app)
+def ps(p_id):
+    cursor = Oracle.execute("""
+    SELECT P.IS_ORGANIZATION, P.FULL_NAME, P.ADDRESS, P.CHIEF_ID,
+      C.FULL_NAME chief_full_name
+      FROM Person P
+        LEFT JOIN Person C ON C.id=P.CHIEF_ID
+      WHERE P.id=:p_id
+    """, p_id=p_id)
+
+    row = cursor.fetchone()
+    cursor.close()
+
+    person = {
+        'id': p_id,
+        'is_organization': row[0],
+        'full_name': row[1],
+        'address': row[2],
+        'chief_id': row[3],
+        'chief_full_name': row[4],
+        'vehicles': {}
+    }
+
+    cursor = Oracle.execute("""
+    SELECT V.id, VT.name, V.reg_number
+      FROM Vehicle V
+        LEFT JOIN VehicleType VT ON V.vehicle_type_id=VT.id
+      WHERE V.chief_id=:p_id
+    """, p_id=p_id)
+
+    for row in cursor.fetchall():
+        person['vehicles'][row[0]] = {
+            'id': row[0],
+            'vehicle_type_name': row[1],
+            'reg_number': row[2]
+        }
+
+    cursor.close()
+
+    return person
